@@ -1,16 +1,39 @@
-import React,{useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import TopQuestions from './TopQuestions'
-import {data} from './data.js'
 import './dashboard.css'
+import { fetchTopQuestions } from '../../Api Calls/dataFetcher'
+import Spinner from '../Spinner'
+
+
 function Dashboard() {
-    const [questions, setQuestions] = useState(data)
+    const [questions, setQuestions] = useState([])
+
+    useEffect(() => {
+        fetchTopQuestions().then(
+            questionsList => {
+                setQuestions(questionsList)
+
+            }
+        )
+
+
+    }, [])
+
+
     return (
-        
-        <div className="dashboard-container App">
-             <h1>Top questions </h1>
-        <TopQuestions questions = {questions}/>
-        </div>
+
+        <>
+
+            <h2 className="App">Top Questions</h2>
+
+      { questions.length === 0 ? <Spinner />  :<div className="dashboard-container App">
+                <TopQuestions questions={questions} />
+            </div>
+    }
+
+        </>
     )
 }
 
 export default Dashboard
+

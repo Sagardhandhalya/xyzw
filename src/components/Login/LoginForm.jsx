@@ -23,11 +23,12 @@ const LoginForm = () => {
         onSubmit: values => {
 
             auth.login(values)
+            
         },
     });
     return (
 
-        auth.loggedIn() ? <Redirect to="/dashboard" /> :
+        auth.user ? <Redirect to="/dashboard" /> :
         <form onSubmit={formik.handleSubmit}>
 
             <label htmlFor="email">Email</label>

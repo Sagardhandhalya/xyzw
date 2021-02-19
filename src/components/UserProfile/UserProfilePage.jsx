@@ -1,22 +1,53 @@
-import React,{useState} from 'react'
+import React,{useState , useEffect} from 'react'
 import {useParams} from 'react-router'
-import {prof , topTag} from './userprofile'
-import {data} from '../Dashboard/data'
 import './userprofilepage.css'
 import TopQuestions from '../Dashboard/TopQuestions'
-import { date } from 'yup'
-
+import Spinner from '../Spinner'
+import { fetchUserProfile , fetchUserTags , fetchTopQuestionsForAUser } from '../../Api Calls/dataFetcher'
 function UserProfilePage() {
 const {userId} = useParams()
-const [profile, setProfile] = useState(prof)
-const [topQuestions, setTopQuestions] = useState(data)
-const [topTags, setTopTags] = useState(topTag)
-console.log(topTags);
+const [profile, setProfile] = useState(null)
+const [topQuestions, setTopQuestions] = useState([])
+const [topTags, setTopTags] = useState([])
+const [alltagVisible, setAlltagVisible] = useState(false)
+
+useEffect(() => {
+
+    fetchUserProfile(userId).then(
+        profileData => setProfile(profileData)
+    )
+
+    fetchUserTags(userId).then(
+        userTagData => {
+            
+             setTopTags(userTagData)
+            
+        }
+        )
+
+    fetchTopQuestionsForAUser(userId).then(
+        data => setTopQuestions(data)
+    )
+   
+    
+   
+}, [])
+
+useEffect(() => {
+    
+}, [])
+
+const toogleAllTag = ()=>{
+   
+    setAlltagVisible(!alltagVisible)
+}
     return (
         <div className="profile-page-container App">
-            <div className="profile">
+            <h3>Profile </h3>
+            <hr/>
+            { profile === null ? <Spinner/> : <div className="profile">
                 <div className="avatar" >
-                    <img src={profile.profile_image} alt="" width="170px" height="200px" />
+                    <img src={profile.profile_image} alt="" width="170px" height="180px" />
                   <span className="reputation"><span className="repunumber">{profile.reputation} </span> <span>REPUTATION</span></span>  
                     <div className="badgebar">
 
@@ -44,26 +75,50 @@ console.log(topTags);
                     <p>WebSite Url : {profile.website_url}</p>
                 </div>
             </div>
-
+}
             <h3>Top Tags</h3>
             <hr/>
-            <div className="toptags">
+            { topTags.length >0 ? <div className="toptags">
+                                        { (alltagVisible || topTags.length <= 9) ? topTags.map((tag) =>  <div key={Date.now()} className="card">
+                                         <p className="q-tag">{tag.tag_name}</p>
+                                        <span>
+                                             <small>SCORES :</small> <b>{tag.answer_score}</b>
+                                             <br/>
+                                        <small>POSTS :</small> <b>{tag.answer_count}</b>
+                                        </span>
+                                        </div>
+                                        )
+                                        :
+                                        topTags.slice(0,9).map((tag) =>  <div key={Date.now()} className="card">
+                                         <p className="q-tag">{tag.tag_name}</p>
+                                        <span>
+                                             <small>SCORES :</small> <b>{tag.answer_score}</b>
+                                             <br/>
+                                        <small>POSTS :</small> <b>{tag.answer_count}</b>
+                                        </span>
+                                        </div>
+                                        )
 
-            {
+                                    }
+                                        <a onClick={toogleAllTag}> show all the tag...</a>
+                                        </div>
+
+                                    
+                                        
+                                        :<Spinner/>
                 
-                topTags.map((tag) =>  <div key={Date.now()} className="card">
-                            <p>{tag.name}</p>
-                            <p>{tag.count}</p>
-                        </div>
-                )
             }
-            </div>
+            
+           
 
             
-
-            <div className="topquestions">
+            <h3>Top Questions</h3>
+            <hr/>
+            {
+                topQuestions.length > 0 ? <div className="topquestions">
         <TopQuestions questions = {topQuestions} />
-            </div>
+            </div> : <Spinner/>
+}
         </div>
         
     )

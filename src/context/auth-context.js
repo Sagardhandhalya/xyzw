@@ -6,12 +6,14 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
 
+
     const login = ({ email, password }) => {
         const user = {
             email: email,
             password: password
         }
         console.log(user);
+        
         setUser(user)
 
     }

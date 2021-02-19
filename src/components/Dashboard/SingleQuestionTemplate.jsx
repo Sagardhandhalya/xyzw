@@ -32,7 +32,7 @@ function SingleQuestionTemplate({ question }) {
                 </span>{question.title}</p>
                 <p className="q-tag-edit">
                     <span>{question.tags.map((tag) => <span className="q-tag"> {"  " + tag + "  "}  </span>)}
-                    </span> <span> Last modified {ConvertToRedableDate(question.last_activity_date)} by  <Link to={`/user/${question.question_id}`}>{question.owner.display_name}</Link>
+                    </span> <span> Last modified {ConvertToRedableDate(question.last_activity_date)} by  <Link to={`/user/${question.owner.user_id}`}>{question.owner.display_name}</Link>
                     </span>
                 </p>
             </div>

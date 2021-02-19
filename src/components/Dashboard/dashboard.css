@@ -9,8 +9,8 @@
     
     display: flex;
     width: inherit;
-    border-left: 1px solid #D6D9DC;
-    border-right: 1px solid #D6D9DC;
+    /* border-left: 1px solid #D6D9DC;
+    border-right: 1px solid #D6D9DC; */
     border-bottom: 1px solid #D6D9DC;
    padding: 10px 10px;
  
@@ -27,9 +27,8 @@
 }
 
 .q-container div{
-    margin-right:10px;
-    
-    
+    margin-right:20px;
+
 }
 
 .q-container  .small{
@@ -69,3 +68,4 @@
     font-size: 12px;
     color: #8f9194;
 }
+

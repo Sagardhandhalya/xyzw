@@ -6,7 +6,7 @@
 }
 
 .avatar{
-    padding: 30px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -78,15 +78,31 @@
     
     display: flex;
     flex-wrap: wrap;
+    
+   
 }
 
 
 .card{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    background-color: rgb(215, 233, 231);
-   width: 100px;
-    margin: 10px 10px;
+    background-color: #FAFAFB;
+    margin: 4px 4px;
     text-align: center;
-    padding: 20px;
-    border-radius: 10px;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    padding: 1px 4px;
+    display: flex;
+    width: 25%;
+    color: rgb(175, 170, 180);
+}
+
+.q-tag{
+    
+    background-color: #E1ECF4;
+     color : #39739d;
+   padding: 8px;
+    border-radius: 3px;
+    color:#3A749D;
+   
 }

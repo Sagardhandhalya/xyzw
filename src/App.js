@@ -35,7 +35,7 @@ export default App;
 
 
 function PrivateRoute({ children, ...rest }) {
- const auth = useAuth(AuthContext)
+ const auth = useAuth()
 
   return (
     <Route
