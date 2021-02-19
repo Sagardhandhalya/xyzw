@@ -3,7 +3,7 @@ import LoginForm from './LoginForm'
 import './login.css'
 import ThirdPartyLoginButton from './ThirdPartyLoginButton'
 import { Link } from 'react-router-dom'
-import Spinner from '../Spinner'
+
 function LoginPage() {
     return (
         <div className="main">

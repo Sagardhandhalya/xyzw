@@ -4,7 +4,6 @@ function TopQuestions({questions}) {
    
     return (
         <div style={{width:'100%'}}>
-          
             {
                 questions.map((question) => <SingleQuestionTemplate key={question.question_id} question = {question}/>)
             }

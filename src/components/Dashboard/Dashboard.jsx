@@ -3,8 +3,7 @@ import TopQuestions from './TopQuestions'
 import './dashboard.css'
 import { fetchTopQuestions } from '../../Api Calls/dataFetcher'
 import Spinner from '../Spinner'
-
-
+import {data} from './data'
 function Dashboard() {
     const [questions, setQuestions] = useState([])
 
@@ -12,18 +11,12 @@ function Dashboard() {
         fetchTopQuestions().then(
             questionsList => {
                 setQuestions(questionsList)
-
-            }
-        )
-
-
+            })
     }, [])
-
 
     return (
 
         <>
-
             <h2 className="App">Top Questions</h2>
 
       { questions.length === 0 ? <Spinner />  :<div className="dashboard-container App">
